@@ -5,13 +5,13 @@ import { MdDone } from "react-icons/md";
 import './styles.css';
 import { Draggable } from "react-beautiful-dnd";
 
-type Props = {
+type ISingleTodoProps = {
   index: number,
   todo: Todo;
   todos: Todo[],
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
-const SingleTodo: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
+const SingleTodo: React.FC<ISingleTodoProps> = ({ index, todo, todos, setTodos }) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
   const inputRef = useRef<HTMLInputElement>(null);
