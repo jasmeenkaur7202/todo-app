@@ -10,10 +10,8 @@ type Props = {
   todo: Todo;
   todos: Todo[],
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  completedTodos: Todo[],
-  setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
-const SingleTodo: React.FC<Props> = ({ index, todo, todos, setTodos, completedTodos, setCompletedTodos }) => {
+const SingleTodo: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,7 +25,8 @@ const SingleTodo: React.FC<Props> = ({ index, todo, todos, setTodos, completedTo
   };
 
   const handleDelete = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    const deleteTodo = todos.filter((todo) => todo.id !== id);
+    setTodos(deleteTodo);
   };
 
   const handleEdit = (e: React.FormEvent, id: number) => {
@@ -56,6 +55,7 @@ const SingleTodo: React.FC<Props> = ({ index, todo, todos, setTodos, completedTo
                 value={editTodo} 
                 onChange={(e) => setEditTodo(e.target.value)} 
                 ref={inputRef} 
+                autoFocus
               />
             ) : (
               todo.isDone ? (
